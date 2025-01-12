@@ -1,4 +1,4 @@
 return {
-  "folke/which-key.nvim",
+    "folke/lazydev.nvim",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
 }

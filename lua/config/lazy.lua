@@ -15,35 +15,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('config.globals') 
-require('config.options')
-require('config.keymaps')
-
-local opts = {
-	defaults = {
-		lazy = true,
-	},
-	install = {
-		colorscheme = { "catppuccin" },
-	},
-	rtp = {
-		disabled_plugins = {
-			"gzip",
-			"matchit",
-			"matchparen",
-			"netrw",
-			"netrwPlugin",
-			"tarPlugin",
-			"tohtml",
-			"tutor",
-			"zipPlugin",
-		},
-	},
-	change_detection = {
-		notify = false,
-	},
-}
-
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Setup lazy.nvim
-require("lazy").setup("plugins",opts)
+require("lazy").setup({
+  spec = {
+    -- import your plugins
+    { import = "config.plugins" },
+  },
+ })

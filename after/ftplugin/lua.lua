@@ -1,0 +1,4 @@
+--Use a file like this to do specifc options for specific languages ts.lua, go.lua... 
+--for example this is a lua file
+--local set =  vim.opt_local
+--set.shiftwithd = 2 
