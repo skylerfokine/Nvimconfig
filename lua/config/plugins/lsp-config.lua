@@ -1,6 +1,6 @@
 local config = function()
   require("neoconf").setup({})
-  local cmp_nvim_lsp = require("cmp_nvim_lsp")
+  local cmp_nvim_lsp = require("config.plugins.cmp_nvim_lsp")
 
 	local lspconfig = require('lspconfig')
 
