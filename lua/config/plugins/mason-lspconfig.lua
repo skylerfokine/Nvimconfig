@@ -1,0 +1,16 @@
+return{
+  "williamboman/mason-lspconfig.nvim",
+	opts = {
+		ensure_installed = {
+			"efm",
+			"lua_ls",
+      "pyright",
+      "jsonls",
+      "clangd",
+      "emmet_ls",
+		},
+		automatic_installation = true,
+	},
+	event = "BufReadPre",
+	dependencies = "williamboman/mason.nvim",
+}
