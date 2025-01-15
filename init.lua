@@ -14,6 +14,9 @@ vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimi
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")--executes the source command for curent file
 vim.keymap.set("n", "<space>x", ":.lua<CR>")--executes the current line as lua code
 vim.keymap.set("v", "<space>x", ":lua<CR>")--executes the selected visual block
+vim.keymap.set("n", "<space>et","<cmd>tab split<CR>") -- full screen the current window
+vim.keymap.set("n", "<space>te","<cmd>tabc<CR>") -- close the current window
+
 -- Directory Navigation
 vim.keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
