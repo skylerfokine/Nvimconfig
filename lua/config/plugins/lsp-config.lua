@@ -1,6 +1,6 @@
 local config = function()
   require("neoconf").setup({})
-  local cmp_nvim_lsp = require("config.plugins.cmp_nvim_lsp")
+  local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 	local lspconfig = require('lspconfig')
 
@@ -100,6 +100,9 @@ local config = function()
 	local black = require("efmls-configs.formatters.black")
   local cpplint = require("efmls-configs.linters.cpplint")
 	local clangformat = require("efmls-configs.formatters.clang_format")
+  local eslint_d = require("efmls-configs.linters.eslint_d")
+	local prettierd = require("efmls-configs.formatters.prettier_d")
+	local fixjson = require("efmls-configs.formatters.fixjson")
 
 	-- configure efm server
 	lspconfig.efm.setup({
@@ -125,11 +128,11 @@ local config = function()
 			languages = {
 				lua = { luacheck, stylua },
 				python = { flake8, black },
-				json = { eslint, fixjson },
-				javascript = { eslint, prettier_d },
-				markdown = { prettier_d },
-				html = { prettier_d },
-				css = { prettier_d },
+				json = { eslint_d, fixjson },
+				javascript = { eslint_d, prettierd },
+				markdown = { prettierd },
+				html = { prettierd },
+				css = { prettierd },
 				cpp = { clangformat, cpplint },
 			},
 		},
@@ -147,5 +150,8 @@ return {
 		"windwp/nvim-autopairs",
 		"williamboman/mason.nvim",
 		"creativenull/efmls-configs-nvim",
+    "hrsh7th/nvim-cmp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-nvim-lsp",
 	},
 }
