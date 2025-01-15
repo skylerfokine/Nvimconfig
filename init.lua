@@ -10,9 +10,9 @@ vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Split Vertically
 vim.keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Split Horizontally
 vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle Minimise
 
---Execution bindings 
+--Execution bindings
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")--executes the source command for curent file
-vim.keymap.set("n", "<space>x", ":.lua<CR>")--executes the current line as lua code 
+vim.keymap.set("n", "<space>x", ":.lua<CR>")--executes the current line as lua code
 vim.keymap.set("v", "<space>x", ":lua<CR>")--executes the selected visual block
 -- Directory Navigation
 vim.keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
@@ -24,6 +24,10 @@ vim.api.nvim_set_keymap(
   [[:silent execute '!cmd.exe /C start firefox ' . shellescape(expand('<cfile>'), 1)<CR>]],
   { noremap = true, silent = true }
 )
+
+-- Comments
+vim.api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
+vim.api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mod
