@@ -1,7 +1,5 @@
 # Nvim Configuration
 
-# Nvim Configuration
-
 This is my NeoVim working repository for my Neovim Configuation
 
 ## Acknowledgements/Important Notes
