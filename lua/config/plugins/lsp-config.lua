@@ -1,8 +1,8 @@
 local config = function()
-  require("neoconf").setup({})
-  local cmp_nvim_lsp = require("cmp_nvim_lsp")
+	require("neoconf").setup({})
+	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-	local lspconfig = require('lspconfig')
+	local lspconfig = require("lspconfig")
 
 	local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "" }
 
@@ -12,7 +12,7 @@ local config = function()
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 	end
 
-  local capabilities = cmp_nvim_lsp.default_capabilities()
+	local capabilities = cmp_nvim_lsp.default_capabilities()
 
 	--function for enabling keymaps when on language servers (using Lsp Saga)
 	local on_attach = function(client, bufnr)
@@ -31,21 +31,21 @@ local config = function()
 		vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 		vim.keymap.set("n", "<leader>lo", "<cmd>LSoutlineToggle<CR>", opts)
 
-    if client.name == "pyright" then
-    vim.keymap.set("n", "<leader>oi", "<cmd>PyrightOrganizeImorts<CR>", opts)
-    end
+		if client.name == "pyright" then
+			vim.keymap.set("n", "<leader>oi", "<cmd>PyrightOrganizeImorts<CR>", opts)
+		end
 
-  -- Autoformat on save
-    if client.server_capabilities.documentFormattingProvider then
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format({ async = false })
-            end,
-        })
-    end
+		-- Autoformat on save
+		if client.server_capabilities.documentFormattingProvider then
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format({ async = false })
+				end,
+			})
+		end
 	end
-  -- lua
+	-- lua
 	lspconfig.lua_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
@@ -65,7 +65,7 @@ local config = function()
 		},
 	})
 
-  -- python
+	-- python
 	lspconfig.pyright.setup({
 		-- capabilities = capabilities,
 		on_attach = on_attach,
@@ -82,9 +82,9 @@ local config = function()
 		},
 	})
 
-  -- C/C++
+	-- C/C++
 	lspconfig.clangd.setup({
-	capabilities = capabilities,
+		capabilities = capabilities,
 		on_attach = on_attach,
 		cmd = {
 			"clangd",
@@ -92,9 +92,9 @@ local config = function()
 		},
 	})
 
-  --   css,html,javascript
+	--   css,html,javascript
 	lspconfig.emmet_ls.setup({
-	capabilities = capabilities,
+		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = {
 			"javascript",
@@ -103,14 +103,13 @@ local config = function()
 		},
 	})
 
-
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
-  local flake8 = require("efmls-configs.linters.flake8")
+	local flake8 = require("efmls-configs.linters.flake8")
 	local black = require("efmls-configs.formatters.black")
-  local cpplint = require("efmls-configs.linters.cpplint")
+	local cpplint = require("efmls-configs.linters.cpplint")
 	local clangformat = require("efmls-configs.formatters.clang_format")
-  local eslint_d = require("efmls-configs.linters.eslint_d")
+	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettierd = require("efmls-configs.formatters.prettier_d")
 	local fixjson = require("efmls-configs.formatters.fixjson")
 
@@ -144,25 +143,22 @@ local config = function()
 				html = { prettierd },
 				css = { prettierd },
 				cpp = {
-               {
-                lintCommand = "cpplint --filter=-legal/copyright ${INPUT}",
-                lintStdin = false,
-            lintFormats = {
-              "%f:%l: %m"
-            },
-          },
-          {
-            formatCommand = "clang-format --style=LLVM",
-            formatStdin = true,
-          },
-        },
+					{
+						lintCommand = "cpplint --filter=-legal/copyright ${INPUT},-build/namespaces ${INPUT}",
+						lintStdin = false,
+						lintFormats = {
+							"%f:%l: %m",
+						},
+					},
+					{
+						formatCommand = "clang-format --style=LLVM",
+						formatStdin = true,
+					},
+				},
 			},
 		},
 	})
 end
-
-
-
 
 return {
 	"neovim/nvim-lspconfig",
@@ -172,7 +168,7 @@ return {
 		"windwp/nvim-autopairs",
 		"williamboman/mason.nvim",
 		"creativenull/efmls-configs-nvim",
-    "hrsh7th/nvim-cmp",
+		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-nvim-lsp",
 	},
