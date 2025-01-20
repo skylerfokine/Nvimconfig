@@ -12,3 +12,10 @@ ignore = {
 read_globals = {
   "vim",
 }
+
+external = {
+    cpplint = {
+        command = "cpplint",
+        args = {"--filter=-legal/copyright"}
+    }
+}
