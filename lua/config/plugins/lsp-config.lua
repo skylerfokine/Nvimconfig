@@ -133,7 +133,19 @@ local config = function()
 				markdown = { prettierd },
 				html = { prettierd },
 				css = { prettierd },
-				cpp = { clangformat, cpplint },
+				cpp = {
+               {
+                lintCommand = "cpplint --filter=-legal/copyright ${INPUT}",
+                lintStdin = false,
+            lintFormats = {
+              "%f:%l: %m"
+            },
+          },
+          {
+            formatCommand = "clang-format --style=LLVM",
+            formatStdin = true,
+          },
+        },
 			},
 		},
 	})
