@@ -2,14 +2,11 @@
 set filter=-legal/copyright,-build/namespaces
 
 # Specify file extensions that should be checked by cpplint
-set extensions=cpp,h,hpp
+set extensions=cpp,h,hpp,cc
 
-# Enable C++11 checks (optional)
-set valid_extensions=cpp,h,hpp,cxx,cc
 
 # Suppress other categories of warnings (optional)
 # Uncomment and modify these as needed:
 # set filter=-whitespace/indent,-readability/todo,-build/include_what_you_use
 
-# Add more customization as needed for your project
 
