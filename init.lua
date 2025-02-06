@@ -17,7 +17,7 @@ vim.keymap.set("v", "<space>x", ":lua<CR>") --executes the selected visual block
 vim.keymap.set("n", "<space>et", "<cmd>tab split<CR>") -- full screen the current window
 vim.keymap.set("n", "<space>te", "<cmd>tabc<CR>") -- close the current window
 vim.api.nvim_set_keymap("n", "<leader>ng", ":Neogen<CR>", { noremap = true, silent = true }) -- run neogen
-vim.api.nvim_set_keymap("n", "<leader>ot", ":terminal<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ot", ":Lspsaga term_toggle<CR>", { noremap = true, silent = true })
 
 -- Directory Navigation
 vim.keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })

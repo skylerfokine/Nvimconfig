@@ -7,7 +7,7 @@ This is my NeoVim working repository for my Neovim Configuation
  - Terminal: Windows Terminal
  - I am using wsl ubuntu
  - To get a nerd font to work on windows terminal you must install the text file then go into the Terminal settings and set it as font face (if you wish to have the same setup)
- - Use the following commmit for lazy lock file: 4efd819
+ - Use the following commmit for lazy lock file: 96f31b1 
 
 
 ## Plugins 

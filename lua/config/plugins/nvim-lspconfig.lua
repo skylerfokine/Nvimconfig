@@ -1,16 +1,9 @@
 local config = function()
 	require("neoconf").setup({})
+	require("gitsigns").setup()
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 	local lspconfig = require("lspconfig")
-
-	local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "" }
-
-	-- Load the signs
-	for type, icon in pairs(signs) do
-		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-	end
 
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
