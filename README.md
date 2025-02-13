@@ -52,3 +52,5 @@ This is my NeoVim working repository for my Neovim Configuation
 
 [nui.nvim](https://github.com/MunifTanjim/nui.nvim) - UI component library for Neovim
 
+[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git integration for buffers (Green yellow red on vscode)
+
