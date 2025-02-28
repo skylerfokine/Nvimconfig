@@ -2,7 +2,6 @@ return {
 	"hrsh7th/nvim-cmp",
 	config = function()
 		local cmp = require("cmp")
-		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
@@ -12,7 +11,7 @@ return {
 		cmp.setup({
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
@@ -45,6 +44,7 @@ return {
 		{
 
 			"L3MON4D3/LuaSnip",
+			dependencies = { { "rafamadriz/friendly-snippets" } },
 			-- follow latest release.
 			version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 			-- install jsregexp (optional!).
