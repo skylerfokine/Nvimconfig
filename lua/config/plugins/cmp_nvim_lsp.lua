@@ -1,10 +1,10 @@
 return {
 	"hrsh7th/nvim-cmp",
+
 	config = function()
+		require("luasnip/loaders/from_vscode").lazy_load()
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
-
-		require("luasnip.loaders.from_vscode").lazy_load()
 
 		vim.opt.completeopt = "menu,menuone,noselect"
 
@@ -33,6 +33,7 @@ return {
 			-- configure lspkind for vs-code like icons
 			formatting = {
 				format = lspkind.cmp_format({
+					mode = "symbol_text", -- show symbol and text
 					maxwidth = 50,
 					ellipsis_char = "...",
 				}),
@@ -44,7 +45,7 @@ return {
 		{
 
 			"L3MON4D3/LuaSnip",
-			dependencies = { { "rafamadriz/friendly-snippets" } },
+			dependencies = { "rafamadriz/friendly-snippets" },
 			-- follow latest release.
 			version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 			-- install jsregexp (optional!).
