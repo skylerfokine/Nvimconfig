@@ -3,6 +3,7 @@ return {
 	lazy = false,
 	opts = {
 		ensure_installed = {
+			"angularls",
 			"efm",
 			"lua_ls",
 			"pyright",
