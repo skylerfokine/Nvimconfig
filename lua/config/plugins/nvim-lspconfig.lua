@@ -141,6 +141,7 @@ local config = function()
 				python = { flake8, black },
 				json = { eslint_d, fixjson },
 				javascript = { eslint_d, prettierd },
+				typescript = { eslint_d, prettierd },
 				markdown = { prettierd },
 				html = { prettierd },
 				css = { prettierd },
