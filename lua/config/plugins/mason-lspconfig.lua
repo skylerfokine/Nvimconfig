@@ -10,6 +10,7 @@ return {
 			"jsonls",
 			"clangd",
 			"emmet_ls",
+			"ts_ls",
 		},
 		automatic_installation = true,
 	},

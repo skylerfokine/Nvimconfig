@@ -85,6 +85,12 @@ local config = function()
 		},
 	})
 
+	lspconfig.ts_ls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "typescript" },
+	})
+
 	--   css,html,javascript
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
