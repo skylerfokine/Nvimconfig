@@ -21,14 +21,8 @@ vim.api.nvim_set_keymap("n", "<leader>ot", ":Lspsaga term_toggle<CR>", { noremap
 
 -- Directory Navigation
 vim.keymap.set("n", "<leader>m", ":NvimTreeFocus<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>f", function()
-	vim.cmd(":NvimTreeToggle<CR>")
-	-- Add a delay of 100 milliseconds to give time for the tree to open.
-	vim.defer_fn(function()
-		vim.cmd(":Flogsplit")
-	end, 100)
-end, { noremap = true, silent = true })
-
+vim.keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gg", ":Flogsplit<CR>", { noremap = true, silent = true })
 -- Link acessesing
 vim.api.nvim_set_keymap(
 	"n",
