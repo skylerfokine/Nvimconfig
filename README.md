@@ -54,3 +54,11 @@ This is my NeoVim working repository for my Neovim Configuation
 
 [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git integration for buffers (Green yellow red on vscode)
 
+Note for self of dependency downloads
+
+Clangd 
+Gcc
+Luarocks
+Pip 
+Python3
+Ripgrep
