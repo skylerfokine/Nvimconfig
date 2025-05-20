@@ -60,5 +60,10 @@ Clangd
 Gcc
 Luarocks
 Pip 
-Python3
+Python3-venv
 Ripgrep
+golang-go
+npm
+sudo npm i -g typescript
+node
+
