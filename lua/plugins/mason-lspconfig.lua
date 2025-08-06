@@ -15,5 +15,18 @@ return {
 		automatic_installation = true,
 	},
 	event = "BufReadPre",
-	dependencies = "williamboman/mason.nvim",
+	dependencies = {
+		"williamboman/mason.nvim",
+		cmd = "Mason",
+		event = "BufReadPre",
+		opts = {
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		},
+	},
 }

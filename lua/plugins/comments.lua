@@ -10,5 +10,5 @@ return {
 			block = "gob",
 		},
 	},
-	lazy = false,
+	lazy = true,
 }
