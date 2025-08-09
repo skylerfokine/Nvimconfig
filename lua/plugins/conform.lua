@@ -5,8 +5,10 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "black", "isort" },
-				javascript = { "prettier" },
+				javascript = { "prettierd" },
+				javascriptreact = { "prettierd" },
+				html = { "prettierd" },
+				css = { "prettierd" },
 				-- Add more formatters for other file types as needed
 			},
 			-- Optional: Configure format on save

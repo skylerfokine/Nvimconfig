@@ -4,6 +4,14 @@ return {
 	vim.keymap.set("n", "<C-j>", "<C-w>j"), -- Navigate Down
 	vim.keymap.set("n", "<C-k>", "<C-w>k"), -- Navigate Up
 	vim.keymap.set("n", "<C-l>", "<C-w>l"), -- Navigate Right
+
+	--Buffer Navigation
+	vim.keymap.set("n", "bb", ":BufferLineCycleNext<CR>"),
+	vim.keymap.set("n", "bB", ":BufferLineCycleNext<CR>"),
+	vim.keymap.set("n", "mb", ":BufferLineMoveNext<CR>"),
+	vim.keymap.set("n", "mB", ":BufferLineMovePrev<CR>"),
+	vim.keymap.set("n", "bc", ":BufferLinePickClose<CR>"),
+
 	-- Window Management
 	vim.keymap.set("n", "<leader>sv", ":vsplit<CR>"), -- Split Vertically
 	vim.keymap.set("n", "<leader>sh", ":split<CR>"), -- Split Horizontally

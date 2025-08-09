@@ -3,14 +3,10 @@ return {
 	lazy = false,
 	opts = {
 		ensure_installed = {
-			"angularls",
-			"efm",
 			"lua_ls",
-			"pyright",
-			"jsonls",
 			"clangd",
-			"emmet_ls",
-			"ts_ls",
+			"css-lsp",
+			"typescript-language-server",
 		},
 		automatic_installation = true,
 	},

@@ -7,8 +7,19 @@ return {
 	opts = {
 		servers = {
 			lua_ls = {},
-			-- tsserver = {},
-			-- pyright  = { settings = { python = { ... } } },
+			-- 1. Front-end: JavaScript/TypeScript/React
+			tsserver = {
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				cmd = { "typescript-language-server", "--stdio" },
+			},
+			cssls = {},
+			html = {},
 		},
 	},
 	-- one config function that lazy.nvim will call with (_, opts)

@@ -10,8 +10,7 @@ return {
 
 	opts = {
 		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-		-- 'super-tab' for mappings similar to vscode (tab to accept)
-		-- 'enter' for enter to accept
+
 		-- 'none' for no mappings
 		--
 		-- All presets have the following mappings:
@@ -43,7 +42,8 @@ return {
 		keymap = {
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
-
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
 			["<Enter>"] = {
 				function(cmp)
 					if cmp.snippet_active() then
@@ -55,8 +55,18 @@ return {
 				"snippet_forward",
 				"fallback",
 			},
+			["<tab>"] = {
+				function(cmp)
+					if cmp.snippet_active() then
+						return cmp.accept()
+					else
+						return cmp.select_and_accept()
+					end
+				end,
+				"snippet_forward",
+				"fallback",
+			},
 			["<S-Tab>"] = { "snippet_backward", "fallback" },
-
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
 		},
