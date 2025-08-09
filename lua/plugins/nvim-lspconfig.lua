@@ -8,7 +8,7 @@ return {
 		servers = {
 			lua_ls = {},
 			-- 1. Front-end: JavaScript/TypeScript/React
-			tsserver = {
+			ts_ls = {
 				filetypes = {
 					"javascript",
 					"javascriptreact",
