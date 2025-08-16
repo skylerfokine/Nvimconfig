@@ -2,6 +2,7 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		"saghen/blink.cmp",
+		"williamboman/mason-lspconfig.nvim",
 	},
 	-- define which LSP servers you want, and any per‐server opts
 	opts = {
