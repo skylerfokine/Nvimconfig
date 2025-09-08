@@ -27,6 +27,7 @@ return {
 			"cssls",
 			"ts_ls",
 			"html",
+			"ocamllsp",
 		},
 		automatic_installation = true,
 	},

@@ -21,6 +21,7 @@ return {
 			},
 			cssls = {},
 			html = {},
+			ocamllsp = {},
 		},
 	},
 	-- one config function that lazy.nvim will call with (_, opts)

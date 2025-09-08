@@ -9,6 +9,7 @@ return {
 				javascriptreact = { "prettierd" },
 				html = { "prettierd" },
 				css = { "prettierd" },
+				ocaml = { "ocamlformat" },
 				-- Add more formatters for other file types as needed
 			},
 			-- Optional: Configure format on save

@@ -19,6 +19,7 @@ return {
 					"vimdoc",
 					"markdown",
 					"markdown_inline",
+					"ocaml",
 				},
 				folding = { enable = true },
 				auto_install = false,
