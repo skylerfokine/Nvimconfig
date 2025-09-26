@@ -1,7 +1,4 @@
 -- lua/plugins/nvim-lspconfig.lua
--- Requires: neovim/nvim-lspconfig, williamboman/mason.nvim,
---           williamboman/mason-lspconfig.nvim, saghen/blink.cmp
-
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -23,10 +20,11 @@ return {
 			map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
 		end
 
-		-- We still use root_pattern helpers from lspconfig.util
+		-- helpers
 		local util = require("lspconfig.util")
 		local dirname = vim.fs.dirname
 		local ocaml_root = util.root_pattern("dune-project", "dune-workspace", "*.opam", ".git")
+		local ts_root = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git") -- CHANGED
 
 		---------------------------------------------------------------------------
 		-- Register servers (new API)
@@ -42,6 +40,7 @@ return {
 			},
 		})
 
+		-- CHANGED: add robust root_dir so vim.fs.* never receives nil/invalid “source”
 		vim.lsp.config("ts_ls", {
 			capabilities = caps,
 			on_attach = on_attach,
@@ -53,19 +52,7 @@ return {
 				"typescript.tsx",
 			},
 			cmd = { "typescript-language-server", "--stdio" },
-		})
-
-		vim.lsp.config("cssls", { capabilities = caps, on_attach = on_attach })
-		vim.lsp.config("html", { capabilities = caps, on_attach = on_attach })
-
-		-- OCaml with robust root_dir and fs.dirname
-		vim.lsp.config("ocamllsp", {
-			capabilities = caps,
-			on_attach = on_attach,
-			cmd = { vim.fn.exepath("ocamllsp") }, -- Mason or opam
-			filetypes = { "ocaml", "ocaml.interface", "ocaml.menhir", "ocaml.ocamllex" },
 			root_dir = function(fname, bufnr)
-				-- Prefer buffer path if available, then filename; always fall back to dirname
 				local start = fname
 				if type(bufnr) == "number" then
 					local n = vim.api.nvim_buf_get_name(bufnr)
@@ -73,7 +60,35 @@ return {
 						start = n
 					end
 				end
-				return ocaml_root(start) or (start and dirname(start))
+				if type(start) ~= "string" or start == "" then
+					return nil -- special/unnamed buffer: don't attach; avoids vim.fs errors
+				end
+				return ts_root(start) or dirname(start)
+			end,
+			single_file_support = true,
+		})
+
+		vim.lsp.config("cssls", { capabilities = caps, on_attach = on_attach })
+		vim.lsp.config("html", { capabilities = caps, on_attach = on_attach })
+
+		-- OCaml with robust root_dir and fs.dirname (minor hardening)
+		vim.lsp.config("ocamllsp", {
+			capabilities = caps,
+			on_attach = on_attach,
+			cmd = { vim.fn.exepath("ocamllsp") },
+			filetypes = { "ocaml", "ocaml.interface", "ocaml.menhir", "ocaml.ocamllex" },
+			root_dir = function(fname, bufnr)
+				local start = fname
+				if type(bufnr) == "number" then
+					local n = vim.api.nvim_buf_get_name(bufnr)
+					if n and n ~= "" then
+						start = n
+					end
+				end
+				if type(start) ~= "string" or start == "" then
+					return nil -- don’t attach on dashboard/No Name buffers
+				end
+				return ocaml_root(start) or dirname(start)
 			end,
 		})
 
@@ -93,13 +108,8 @@ return {
 			underline = true,
 			update_in_insert = false,
 			severity_sort = true,
-			virtual_text = { spacing = 2, source = "if_many" }, -- ok
-			float = {
-				border = "rounded",
-				-- pick ONE of these:
-				-- source = true,
-				source = "if_many",
-			},
+			virtual_text = { spacing = 2, source = "if_many" },
+			float = { border = "rounded", source = "if_many" },
 		})
 	end,
 }
