@@ -67,7 +67,7 @@ return {
 	vim.keymap.set("v", "<leader>ae", ":'<,'>CodeCompanion /explain<CR>", { desc = "AI: Explain selection" }),
 
 	-- 4) Fix/improve selected code (visual)
-	vim.keymap.set("v", "<leader>af", ":'<,'>CodeCompanion /fix<CR>", { desc = "AI: Fix selection" }),
+	vim.keymap.set("v", "<leader>af", ":'<,'>CodeCompanion /fix<CR>", { desc = "AI: Fix this codes" }),
 
 	-- 5) “Talk about this file” (adds current buffer as context automatically)
 	vim.keymap.set("n", "<leader>ab", function()
@@ -76,6 +76,8 @@ return {
 
 	-- Optional: add the selection to the chat thread quickly
 	vim.keymap.set("v", "<leader>ad", ":'<,'>CodeCompanionChat Add<CR>", { desc = "AI: Add selection to chat" }),
+	-- 6) “Generates test cases” (adds current buffer as context automatically)
+	vim.keymap.set("v", "<leader>ag", ":'<,'>CodeCompanion /tests<CR>", { desc = "AI: Generate Test cases" }),
 
 	-- Highlight when yanking (copying) text
 	--  Try it with `yap` in normal mod
