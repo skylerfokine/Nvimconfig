@@ -10,6 +10,7 @@ return {
 				html = { "prettierd" },
 				css = { "prettierd" },
 				ocaml = { "ocamlformat" },
+				sql = { "sql_formatter" },
 				-- Add more formatters for other file types as needed
 			},
 			-- Optional: Configure format on save

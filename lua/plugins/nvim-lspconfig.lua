@@ -43,6 +43,11 @@ return {
 		---------------------------------------------------------------------------
 		-- Register servers (new API)
 		---------------------------------------------------------------------------
+
+		---------------------------------------------------------------------------
+		-- Lua_ls
+		---------------------------------------------------------------------------
+
 		vim.lsp.config("lua_ls", {
 			capabilities = caps,
 			on_attach = on_attach,
@@ -53,6 +58,22 @@ return {
 				},
 			},
 		})
+
+		---------------------------------------------------------------------------
+		-- SQL
+		---------------------------------------------------------------------------
+
+		vim.lsp.config("sqlls", {
+			capabilities = caps,
+			on_attach = on_attach,
+			filetypes = { "sql", "mysql" },
+			cmd = { "sql-language-server", "up", "--method", "stdio" },
+			single_file_support = true, -- works fine for ad-hoc .sql files
+		})
+
+		---------------------------------------------------------------------------
+		-- Typescript javascript
+		---------------------------------------------------------------------------
 
 		vim.lsp.config("ts_ls", {
 			capabilities = caps,
@@ -80,6 +101,10 @@ return {
 			end,
 			single_file_support = true,
 		})
+
+		---------------------------------------------------------------------------
+		-- Css and HTMl
+		---------------------------------------------------------------------------
 
 		vim.lsp.config("cssls", { capabilities = caps, on_attach = on_attach })
 		vim.lsp.config("html", { capabilities = caps, on_attach = on_attach })
@@ -123,6 +148,19 @@ return {
 			single_file_support = true,
 		})
 
+		--------------------------------------------------------------------------
+		-- C++ Language server
+		---------------------------------------------------------------------------
+
+		vim.lsp.config("clangd", {
+			capabilities = caps,
+			on_attach = on_attach,
+			-- (optional but nice)
+			-- root_dir = require("lspconfig.util").root_pattern(
+			--   "compile_commands.json", "compile_flags.txt", ".git"
+			-- ),
+		})
+
 		---------------------------------------------------------------------------
 		-- Enable servers
 		---------------------------------------------------------------------------
@@ -131,7 +169,8 @@ return {
 		vim.lsp.enable("cssls")
 		vim.lsp.enable("html")
 		vim.lsp.enable("ocamllsp")
-
+		vim.lsp.enable("clangd")
+		vim.lsp.enable("sqlls")
 		---------------------------------------------------------------------------
 		-- Safety net: ensure ocamllsp attaches even if auto-start didn’t fire
 		---------------------------------------------------------------------------
