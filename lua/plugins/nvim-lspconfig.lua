@@ -75,31 +75,34 @@ return {
 		-- Typescript javascript
 		---------------------------------------------------------------------------
 
+		local mason_tsserver = vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server"
+
 		vim.lsp.config("ts_ls", {
 			capabilities = caps,
 			on_attach = on_attach,
+
+			cmd = { mason_tsserver, "--stdio" },
+
 			filetypes = {
 				"javascript",
 				"javascriptreact",
+				"javascript.jsx",
 				"typescript",
 				"typescriptreact",
 				"typescript.tsx",
 			},
-			cmd = { "typescript-language-server", "--stdio" },
-			root_dir = function(fname, bufnr)
-				local start = fname
-				if type(bufnr) == "number" then
-					local n = vim.api.nvim_buf_get_name(bufnr)
-					if n and n ~= "" then
-						start = n
-					end
-				end
-				if type(start) ~= "string" or start == "" then
-					return nil
-				end
-				return ts_root(start) or dirname(start)
-			end,
-			single_file_support = true,
+
+			-- New 0.11+ style root detection
+			root_markers = {
+				"package.json",
+				"package-lock.json",
+				"tsconfig.json",
+				"jsconfig.json",
+				".git",
+			},
+
+			workspace_required = true, -- only start if a workspace root is found
+			single_file_support = false,
 		})
 
 		---------------------------------------------------------------------------
@@ -171,6 +174,7 @@ return {
 		vim.lsp.enable("ocamllsp")
 		vim.lsp.enable("clangd")
 		vim.lsp.enable("sqlls")
+		vim.lsp.enable("ts_ls")
 		---------------------------------------------------------------------------
 		-- Safety net: ensure ocamllsp attaches even if auto-start didn’t fire
 		---------------------------------------------------------------------------
