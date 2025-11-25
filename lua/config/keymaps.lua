@@ -5,6 +5,11 @@ return {
 	vim.keymap.set("n", "<C-k>", "<C-w>k"), -- Navigate Up
 	vim.keymap.set("n", "<C-l>", "<C-w>l"), -- Navigate Right
 
+	-- Find and replace
+	vim.keymap.set("n", "<leader>rn", function()
+		return ":IncRename " .. vim.fn.expand("<cword>")
+	end, { expr = true }),
+
 	--Buffer Navigation
 	vim.keymap.set("n", "bb", ":BufferLineCycleNext<CR>"),
 	vim.keymap.set("n", "bB", ":BufferLineCycleNext<CR>"),
