@@ -12,7 +12,7 @@ return {
 
 	--Buffer Navigation
 	vim.keymap.set("n", "bb", ":BufferLineCycleNext<CR>"),
-	vim.keymap.set("n", "bB", ":BufferLineCycleNext<CR>"),
+	vim.keymap.set("n", "bB", ":BufferLineCyclePrev<CR>"),
 	vim.keymap.set("n", "mb", ":BufferLineMoveNext<CR>"),
 	vim.keymap.set("n", "mB", ":BufferLineMovePrev<CR>"),
 	vim.keymap.set("n", "bc", ":BufferLinePickClose<CR>"),
@@ -20,7 +20,7 @@ return {
 	-- Window Management
 	vim.keymap.set("n", "<leader>sv", ":vsplit<CR>"), -- Split Vertically
 	vim.keymap.set("n", "<leader>sh", ":split<CR>"), -- Split Horizontally
-	vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>"), -- Toggle Minimise
+	-- <leader>sm: MaximizerToggle removed (plugin not installed)
 
 	--Execution bindings
 	vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>"), --executes the source command for curent file

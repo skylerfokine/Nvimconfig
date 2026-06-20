@@ -28,6 +28,8 @@ return {
 			"ts_ls",
 			"html",
 			"ocamllsp",
+			"pyright",
+			"sqlls",
 		},
 		automatic_installation = true,
 	},

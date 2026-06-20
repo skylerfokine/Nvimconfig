@@ -20,6 +20,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"ocaml",
+				"python",
 				},
 				folding = { enable = true },
 				auto_install = false,

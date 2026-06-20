@@ -30,19 +30,16 @@ return {
 			end
 
 			map("n", "K", vim.lsp.buf.hover, "Hover docs")
-			map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+			-- use IncRename so it matches the global keymaps.lua binding
+			vim.keymap.set("n", "<leader>rn", function()
+				return ":IncRename " .. vim.fn.expand("<cword>")
+			end, { buffer = bufnr, silent = true, expr = true, desc = "Rename symbol (IncRename)" })
 			map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
 		end
 
 		-- helpers
 		local util = require("lspconfig.util")
-		local dirname = vim.fs.dirname
 		local ocaml_root = util.root_pattern("dune-project", "dune-workspace", "*.opam", ".git")
-		local ts_root = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")
-
-		---------------------------------------------------------------------------
-		-- Register servers (new API)
-		---------------------------------------------------------------------------
 
 		---------------------------------------------------------------------------
 		-- Lua_ls
@@ -68,7 +65,7 @@ return {
 			on_attach = on_attach,
 			filetypes = { "sql", "mysql" },
 			cmd = { "sql-language-server", "up", "--method", "stdio" },
-			single_file_support = true, -- works fine for ad-hoc .sql files
+			single_file_support = true,
 		})
 
 		---------------------------------------------------------------------------
@@ -92,7 +89,6 @@ return {
 				"typescript.tsx",
 			},
 
-			-- New 0.11+ style root detection
 			root_markers = {
 				"package.json",
 				"package-lock.json",
@@ -101,16 +97,25 @@ return {
 				".git",
 			},
 
-			workspace_required = true, -- only start if a workspace root is found
+			workspace_required = true,
 			single_file_support = false,
 		})
 
 		---------------------------------------------------------------------------
-		-- Css and HTMl
+		-- CSS and HTML
 		---------------------------------------------------------------------------
 
 		vim.lsp.config("cssls", { capabilities = caps, on_attach = on_attach })
 		vim.lsp.config("html", { capabilities = caps, on_attach = on_attach })
+
+		---------------------------------------------------------------------------
+		-- Python via Pyright
+		---------------------------------------------------------------------------
+
+		vim.lsp.config("pyright", {
+			capabilities = caps,
+			on_attach = on_attach,
+		})
 
 		---------------------------------------------------------------------------
 		-- OCaml via Mason ONLY
@@ -128,10 +133,9 @@ return {
 		vim.lsp.config("ocamllsp", {
 			capabilities = caps,
 			on_attach = on_attach,
-			cmd = { mason_ocamllsp }, -- FORCE Mason’s server
+			cmd = { mason_ocamllsp },
 			filetypes = { "ocaml", "ocaml.interface", "ocaml.menhir", "ocaml.ocamllex" },
 
-			-- Attach in Dune/git roots, or fall back to the file's directory (single-file/mixed folders)
 			root_dir = function(fname, bufnr)
 				local start = fname
 				if type(bufnr) == "number" then
@@ -141,27 +145,21 @@ return {
 					end
 				end
 				if type(start) ~= "string" or start == "" then
-					return nil -- don’t attach in unnamed/scratch buffers
+					return nil
 				end
-				return ocaml_root(start) -- real project?
-					or vim.fs.dirname(start) -- single file / mixed folder
-					or vim.loop.cwd()
+				return ocaml_root(start) or vim.fs.dirname(start) or vim.loop.cwd()
 			end,
 
 			single_file_support = true,
 		})
 
-		--------------------------------------------------------------------------
+		---------------------------------------------------------------------------
 		-- C++ Language server
 		---------------------------------------------------------------------------
 
 		vim.lsp.config("clangd", {
 			capabilities = caps,
 			on_attach = on_attach,
-			-- (optional but nice)
-			-- root_dir = require("lspconfig.util").root_pattern(
-			--   "compile_commands.json", "compile_flags.txt", ".git"
-			-- ),
 		})
 
 		---------------------------------------------------------------------------
@@ -174,14 +172,14 @@ return {
 		vim.lsp.enable("ocamllsp")
 		vim.lsp.enable("clangd")
 		vim.lsp.enable("sqlls")
-		vim.lsp.enable("ts_ls")
+		vim.lsp.enable("pyright")
+
 		---------------------------------------------------------------------------
-		-- Safety net: ensure ocamllsp attaches even if auto-start didn’t fire
+		-- Safety net: ensure ocamllsp attaches even if auto-start didn't fire
 		---------------------------------------------------------------------------
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = { "ocaml", "ocaml.interface", "ocaml.menhir", "ocaml.ocamllex" },
 			callback = function(args)
-				-- Skip if already attached
 				if #vim.lsp.get_clients({ buf = args.buf, name = "ocamllsp" }) > 0 then
 					return
 				end
@@ -223,7 +221,7 @@ return {
 		end, {})
 
 		---------------------------------------------------------------------------
-		-- Diagnostics (optional)
+		-- Diagnostics
 		---------------------------------------------------------------------------
 		vim.diagnostic.config({
 			underline = true,

@@ -1,19 +1,17 @@
 local config = function()
-	local theme = require("lualine.themes.catppuccin")
-
 	require("lualine").setup({
 		options = {
-			theme = theme,
+			theme = "catppuccin",
 			globalstatus = true,
 		},
 		tabline = {},
 		sections = {
-    	lualine_a = { "mode" },
+			lualine_a = { "mode" },
 			lualine_b = { "buffers" },
 			lualine_x = { "encoding", "fileformat", "filetype" },
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
-    },
+		},
 	})
 end
 
